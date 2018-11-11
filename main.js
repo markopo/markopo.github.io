@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    {{ title }}!\n  </h1>\n  <div>\n      <app-heroes></app-heroes>\n\n  </div>\n</div>\n\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    {{ title }}!\n  </h1>\n  <div>\n      <app-heroes></app-heroes>\n      <app-messages></app-messages>\n  </div>\n</div>\n\n\n"
 
 /***/ }),
 
@@ -97,12 +97,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _heroes_heroes_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./heroes/heroes.component */ "./src/app/heroes/heroes.component.ts");
 /* harmony import */ var _hero_detail_hero_detail_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hero-detail/hero-detail.component */ "./src/app/hero-detail/hero-detail.component.ts");
+/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -117,7 +119,8 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
                 _heroes_heroes_component__WEBPACK_IMPORTED_MODULE_4__["HeroesComponent"],
-                _hero_detail_hero_detail_component__WEBPACK_IMPORTED_MODULE_5__["HeroDetailComponent"]
+                _hero_detail_hero_detail_component__WEBPACK_IMPORTED_MODULE_5__["HeroDetailComponent"],
+                _messages_messages_component__WEBPACK_IMPORTED_MODULE_6__["MessagesComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -203,6 +206,54 @@ var HeroDetailComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/hero.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/hero.service.ts ***!
+  \*********************************/
+/*! exports provided: HeroService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeroService", function() { return HeroService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _mock_heroes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mock-heroes */ "./src/app/mock-heroes.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message.service */ "./src/app/message.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var HeroService = /** @class */ (function () {
+    function HeroService(messageService) {
+        this.messageService = messageService;
+    }
+    HeroService.prototype.getHeroes = function () {
+        this.messageService.add('Heroservice: fetched heroes!');
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(_mock_heroes__WEBPACK_IMPORTED_MODULE_1__["HEROES"]);
+    };
+    HeroService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
+    ], HeroService);
+    return HeroService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/hero.ts":
 /*!*************************!*\
   !*** ./src/app/hero.ts ***!
@@ -256,7 +307,7 @@ module.exports = "<h2>My Heroes</h2>\n<ul class=\"heroes\">\n  <li *ngFor=\"let 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeroesComponent", function() { return HeroesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _mock_heroes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mock-heroes */ "./src/app/mock-heroes.ts");
+/* harmony import */ var _hero_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hero.service */ "./src/app/hero.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -269,10 +320,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var HeroesComponent = /** @class */ (function () {
-    function HeroesComponent() {
-        this.heroes = _mock_heroes__WEBPACK_IMPORTED_MODULE_1__["HEROES"];
+    function HeroesComponent(heroService) {
+        this.heroService = heroService;
     }
     HeroesComponent.prototype.ngOnInit = function () {
+        this.getHeroes();
+    };
+    HeroesComponent.prototype.getHeroes = function () {
+        var _this = this;
+        this.heroService.getHeroes().subscribe(function (heroes) { return _this.heroes = heroes; });
     };
     HeroesComponent.prototype.onSelect = function (hero) {
         this.selectedHero = hero;
@@ -283,9 +339,119 @@ var HeroesComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./heroes.component.html */ "./src/app/heroes/heroes.component.html"),
             styles: [__webpack_require__(/*! ./heroes.component.css */ "./src/app/heroes/heroes.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_hero_service__WEBPACK_IMPORTED_MODULE_1__["HeroService"]])
     ], HeroesComponent);
     return HeroesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/message.service.ts":
+/*!************************************!*\
+  !*** ./src/app/message.service.ts ***!
+  \************************************/
+/*! exports provided: MessageService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageService", function() { return MessageService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var MessageService = /** @class */ (function () {
+    function MessageService() {
+        this.messages = [];
+    }
+    MessageService.prototype.add = function (message) {
+        this.messages.push(message);
+    };
+    MessageService.prototype.clear = function () {
+        this.messages = [];
+    };
+    MessageService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], MessageService);
+    return MessageService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/messages/messages.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/messages/messages.component.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".alert {\n    margin: 25px 0;\n    padding: 10px 0;\n    background: pink;\n    color: darkred;\n    border: 1px solid red; ;\n    border-radius: 4px;\n    font-weight: bold;\n}"
+
+/***/ }),
+
+/***/ "./src/app/messages/messages.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/messages/messages.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"messageService.messages.length\">\n\n  <h2>Messages</h2>\n  <button class=\"clear\" (click)=\"messageService.clear()\">clear</button>\n  <div *ngFor='let message of messageService.messages'>\n    <div class=\"alert\">{{message}}</div>\n  </div>\n\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/messages/messages.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/messages/messages.component.ts ***!
+  \************************************************/
+/*! exports provided: MessagesComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessagesComponent", function() { return MessagesComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../message.service */ "./src/app/message.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MessagesComponent = /** @class */ (function () {
+    function MessagesComponent(messageService) {
+        this.messageService = messageService;
+    }
+    MessagesComponent.prototype.ngOnInit = function () {
+    };
+    MessagesComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-messages',
+            template: __webpack_require__(/*! ./messages.component.html */ "./src/app/messages/messages.component.html"),
+            styles: [__webpack_require__(/*! ./messages.component.css */ "./src/app/messages/messages.component.css")]
+        }),
+        __metadata("design:paramtypes", [_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
+    ], MessagesComponent);
+    return MessagesComponent;
 }());
 
 
